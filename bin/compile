@@ -14,7 +14,7 @@ indent() {
 }
 
 # config
-MONO_VERSION="2.11"
+MONO_VERSION="2.11.1"
 
 # s3 packages
 MONO_PACKAGE="https://dl.dropbox.com/u/14699213/Heroku/Mono/mono-2.11.tar.gz"
@@ -30,12 +30,12 @@ cd ${BUILD_DIR}
 mkdir -p ${CACHE_DIR}
 
 echo "-----> Bundling Mono v${MONO_VERSION}"
-if [ ! -d "${CACHE_DIR}/mono-2.11" ]; then
+if [ ! -d "${CACHE_DIR}/mono-2.11.1" ]; then
   mkdir -p ${CACHE_DIR}/mono-2.11
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
-  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono-2.11
+  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono-2.11.1
 fi
-#cp -r "${CACHE_DIR}/mono-2.11" .
+#cp -r "${CACHE_DIR}/mono-2.11.1" .
 
 # find a solution file
 SLN=$(find . -maxdepth 1 -iname "*.sln")
@@ -49,8 +49,8 @@ if [ "${SLN}" != "" ]; then
   echo "-----> Compiling Mono application"
 
   # need Mono in its expected location for xbuild to work
-  ln -s "${CACHE_DIR}/mono-2.11" /app
-  export PATH="/app/mono-2.11/bin:${PATH}"
+  ln -s "${CACHE_DIR}/mono-2.11.1" /app
+  export PATH="/app/mono-2.11.1/bin:${PATH}"
 
   xbuild /property:Configuration=Release ${SLN} | indent
 fi
