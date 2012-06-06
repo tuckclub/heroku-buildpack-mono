@@ -17,7 +17,7 @@ if [ ! -d "${BUILD_DIR}/bin" ]; then
     SLN="${SLN%%\.[sS][lL][nN]}"
 
     if [ -d "${BUILD_DIR}/${SLN}" ]; then
-      WEB_ROOT=/opt/$SLN
+      WEB_ROOT=/app/$SLN
     fi
   fi
 fi
@@ -25,7 +25,7 @@ fi
 cat <<EOF
 ---
 config_vars:
-  PATH: /opt/mono-2.11/bin:/usr/local/bin:/usr/bin:/bin
+  PATH: /app/mono-2.11/bin:/usr/local/bin:/usr/bin:/bin
 default_process_types:
   web: xsp4 --nonstop --port \$PORT --root "$WEB_ROOT"
 EOF
