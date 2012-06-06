@@ -31,6 +31,7 @@ mkdir -p ${CACHE_DIR}
 
 echo "-----> Bundling Mono v${MONO_VERSION}"
 if [ ! -d "${CACHE_DIR}/mono-2.11" ]; then
+  mkdir -p ${CACHE_DIR}/mono-2.11
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
   curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono-2.11
 fi
