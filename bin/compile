@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
+
 # fail fast
 set -e
 
@@ -22,6 +23,9 @@ MONO_PACKAGE="https://dl.dropbox.com/u/14699213/Heroku/Mono/mono-2.11.1.tar.gz"
 # important directories: https://gist.github.com/fe7f04abbd9538b656c5
 BUILD_DIR=$1
 CACHE_DIR=$2
+
+echo "##################### BUILD_DIR: $BUILD_DIR"
+echo "##################### CACHE_DIR: $CACHE_DIR"
 
 # NOTE: the rest of this script assumes that we're in the build directory
 cd ${BUILD_DIR}
