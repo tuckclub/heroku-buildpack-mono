@@ -31,12 +31,12 @@ mkdir -p ${CACHE_DIR}
 
 echo "-----> Bundling Mono v${MONO_VERSION}"
 #if [ ! -d "${CACHE_DIR}/mono" ]; then
-  rm -rf ${CACHE_DIR}/mono
-  mkdir -p ${CACHE_DIR}/mono
+  #rm -rf ${CACHE_DIR}/mono
+  mkdir -p /app/mono
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
-  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono
+  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C /app/mono
 #fi
-cp -r "${CACHE_DIR}/mono" /app
+#cp -r "${CACHE_DIR}/mono" /app
 
 # find a solution file
 SLN=$(find . -maxdepth 1 -iname "*.sln")
