@@ -30,12 +30,13 @@ cd ${BUILD_DIR}
 mkdir -p ${CACHE_DIR}
 
 echo "-----> Bundling Mono v${MONO_VERSION}"
-if [ ! -d "${CACHE_DIR}/mono-2.11.1" ]; then
-  mkdir -p ${CACHE_DIR}/mono-2.11.1
+#if [ ! -d "${CACHE_DIR}/mono" ]; then
+  rm -rf ${CACHE_DIR}/mono
+  mkdir -p ${CACHE_DIR}/mono
   echo "Fetching Mono v${MONO_VERSION} @ ${MONO_PACKAGE}" | indent
-  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono-2.11.1
-fi
-#cp -r "${CACHE_DIR}/mono-2.11.1" .
+  curl ${MONO_PACKAGE} --silent --max-time 600 -o - | tar xzf - -C ${CACHE_DIR}/mono
+#fi
+#cp -r "${CACHE_DIR}/mono" .
 
 # find a solution file
 SLN=$(find . -maxdepth 1 -iname "*.sln")
@@ -49,8 +50,8 @@ if [ "${SLN}" != "" ]; then
   echo "-----> Compiling Mono application"
 
   # need Mono in its expected location for xbuild to work
-  ln -s "${CACHE_DIR}/mono-2.11.1" /app
-  export PATH="/app/mono-2.11.1/bin:${PATH}"
+  ln -s "${CACHE_DIR}/mono" /app
+  export PATH="/app/mono/bin:${PATH}"
 
   xbuild /property:Configuration=Release ${SLN} | indent
 fi
